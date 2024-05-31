@@ -9,25 +9,21 @@ const mockUrls = [
   "https://utfs.io/f/abb93033-624c-48ba-9873-4b33b672769e-1qer2i.png",
 ];
 
-const mockImages = mockUrls.map((url, index) => ({
-  id: index + 1,
-  url,
-}));
 export default async function HomePage() {
   headers();
-  const posts = await db.query.posts.findMany();
+  const images = await db.query.image.findMany({
+    orderBy: (model, { desc }) => desc(model.id),
+  });
   return (
     <div className="">
       <div className="flex flex-wrap gap-4">
-        {posts.map((post) => (
-          <div key={post.id}>{post.name}</div>
-        ))}
-        {[...mockImages, ...mockImages, ...mockImages].map((image) => (
+        {[...images, ...images, ...images].map((image) => (
           <div
             key={image.id}
             className="w-48 rounded-xl border-4 border-white p-2"
           >
             <img className="rounded-md" src={image.url} alt="Image" />
+            <div className="text-white">{image.name}</div>
           </div>
         ))}
       </div>
