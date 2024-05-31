@@ -17,8 +17,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable} `}>
         <body className={` flex flex-col gap-4`}>
-          <TopNav />
-          {children}
+          <TopNav className="border-b-2 border-white" />
+          <div className="p-8 pt-20">{children}</div>
         </body>
       </html>
     </ClerkProvider>
