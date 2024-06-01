@@ -3,7 +3,7 @@ import Image from "next/image";
 import { db } from "~/server/db";
 import { headers } from "next/headers";
 import { SignedOut, SignedIn } from "@clerk/nextjs";
-
+//1:02:35
 async function Images() {
   const images = await db.query.image.findMany({
     orderBy: (model, { desc }) => desc(model.id),
