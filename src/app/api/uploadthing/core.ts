@@ -1,7 +1,8 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { db } from "~/server/db";
-import { image } from "~/server/db/schema";
+// import { auth } from "@clerk/nextjs/server";
+import { images } from "~/server/db/schema";
 const f = createUploadthing();
 
 const auth = (req: Request) => ({ id: "fakeId" }); // Fake auth function
@@ -25,7 +26,7 @@ export const ourFileRouter = {
       // This code RUNS ON YOUR SERVER after upload
       console.log("Upload complete for userId:", metadata.userId);
 
-      await db.insert(image).values({
+      await db.insert(images).values({
         name: file.name,
         userId: metadata.userId,
         url: file.url,

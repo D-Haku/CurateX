@@ -3,11 +3,11 @@ import Image from "next/image";
 import { db } from "~/server/db";
 import { headers } from "next/headers";
 import { SignedOut, SignedIn } from "@clerk/nextjs";
-//1:02:35
+import { getImages } from "~/server/queries";
+
 async function Images() {
-  const images = await db.query.image.findMany({
-    orderBy: (model, { desc }) => desc(model.id),
-  });
+  const images = await getImages();
+
   return (
     <div className="flex flex-wrap  justify-center gap-4">
       {images.map((image) => (
@@ -24,8 +24,6 @@ async function Images() {
 }
 
 export default async function HomePage() {
-  headers();
-
   return (
     <div className="">
       <SignedOut>
