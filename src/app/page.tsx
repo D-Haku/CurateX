@@ -3,10 +3,10 @@ import Image from "next/image";
 import { db } from "~/server/db";
 import { headers } from "next/headers";
 import { SignedOut, SignedIn } from "@clerk/nextjs";
-import { getImages } from "~/server/queries";
+import { getMyImages } from "~/server/queries";
 
 async function Images() {
-  const images = await getImages();
+  const images = await getMyImages();
 
   return (
     <div className="flex flex-wrap  justify-center gap-4">
@@ -15,14 +15,16 @@ async function Images() {
           key={image.id}
           className="w-48 rounded-xl border-4 border-white p-2"
         >
-          <Image
-            className="rounded-md"
-            src={image.url}
-            style={{ objectFit: "contain" }}
-            width={192}
-            height={192}
-            alt={image.name}
-          />
+          <Link href={`/img/${image.id}`}>
+            <Image
+              className="rounded-md"
+              src={image.url}
+              style={{ objectFit: "contain" }}
+              width={192}
+              height={192}
+              alt={image.name}
+            />
+          </Link>
           <div className="text-white">{image.name}</div>
         </div>
       ))}
