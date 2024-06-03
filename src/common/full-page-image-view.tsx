@@ -1,6 +1,6 @@
 import { clerkClient } from "@clerk/nextjs/server";
 import { getImage } from "~/server/queries";
-
+import Image from "next/image";
 export async function FullPageImageView(props: { photoId: string }) {
   const idAsNumber = Number(props.photoId);
   if (Number.isNaN(idAsNumber)) throw new Error("Invalid photo id");
@@ -10,12 +10,21 @@ export async function FullPageImageView(props: { photoId: string }) {
   const userInfo = await clerkClient.users.getUser(image.userId);
 
   return (
-    <div className="flex h-full w-screen min-w-0 items-center justify-center text-white">
-      <div className="flex-shrink flex-grow">
-        <img src={image.url} className="object-contain" alt={image.name} />
+    <div className="xs:flex-col flex h-full w-screen min-w-0 items-center justify-center text-white  ">
+      <div className="flex flex-shrink px-10">
+        <Image
+          className="rounded-md"
+          src={image.url}
+          style={{ objectFit: "contain" }}
+          alt={image.name}
+          width={480}
+          height={480}
+        />
       </div>
-      <div className="flex h-full w-56 flex-shrink-0 flex-col border-l">
-        <div className="border-b p-2 text-center text-xl">{image.name}</div>
+      <div className=" flex h-full flex-shrink-0 flex-col border-l">
+        <div className="text-wrap border-b p-2 text-center text-xl">
+          {image.name}
+        </div>
 
         <div className="p-2">
           <div>Uploaded By:</div>
