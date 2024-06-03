@@ -5,7 +5,7 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {
+const coreConfig = {
   images: {
     remotePatterns: [{ hostname: "utfs.io" }],
   },
@@ -16,5 +16,34 @@ const config = {
     ignoreDuringBuilds: true,
   },
 };
+
+import { withSentryConfig } from "@sentry/nextjs";
+
+const config = withSentryConfig(
+  coreConfig,
+  {
+    // For all available options, see:
+    // https://github.com/getsentry/sentry-webpack-plugin#options
+
+    // Suppresses source map uploading logs during build
+    silent: true,
+    org: "ftw-inc",
+    project: "t3-gallery",
+  },
+  //@ts-ignore
+  {
+    widenClientFileUpload: true,
+
+    transpileClientSDK: true,
+
+    tunnelRoute: "/monitoring",
+
+    hideSourceMaps: true,
+
+    disableLogger: true,
+
+    automaticVercelMonitors: true,
+  },
+);
 
 export default config;
