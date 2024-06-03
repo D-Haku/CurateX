@@ -15,7 +15,14 @@ async function Images() {
           key={image.id}
           className="w-48 rounded-xl border-4 border-white p-2"
         >
-          <img className="rounded-md" src={image.url} alt="Image" />
+          <Image
+            className="rounded-md"
+            src={image.url}
+            style={{ objectFit: "contain" }}
+            width={192}
+            height={192}
+            alt={image.name}
+          />
           <div className="text-white">{image.name}</div>
         </div>
       ))}
