@@ -24,7 +24,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable} `}>
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-        <body className={` flex flex-col gap-4`}>
+        <body className={` dark flex flex-col gap-4`}>
           <TopNav className=" " />
           <TracingBeam>
             <div className="p-8 pt-28">

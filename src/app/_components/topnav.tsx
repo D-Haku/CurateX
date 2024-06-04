@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { MenuIcon } from "lucide-react";
 import { SimpleUploadButton } from "./upload-button";
 import { useRouter } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
@@ -21,11 +22,11 @@ const TopNav = ({ className }: Props) => {
       </aside>
       <nav className="absolute left-[50%] top-[50%] hidden translate-x-[-50%] translate-y-[-50%] transform md:block"></nav>
 
-      <div className="flex flex-row items-center gap-2">
+      <div className="flex flex-row gap-2 ">
         {user.isSignedIn ? (
           <>
             <div className="">
-              <SimpleUploadButton></SimpleUploadButton>
+              <SimpleUploadButton />
             </div>
 
             <UserButton />
