@@ -11,7 +11,7 @@ async function Images() {
 
   return (
     <div className="flex flex-wrap  justify-center gap-4 p-4">
-      {[...images, ...images].map((image) => (
+      {[...images].map((image) => (
         <div key={image.id} className=" rounded-xl border-4 border-white p-2">
           <Link href={`/img/${image.id}`}>
             <DirectionAwareHover imageUrl={image.url}>
