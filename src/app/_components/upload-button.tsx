@@ -74,21 +74,18 @@ export function SimpleUploadButton() {
 
   const { inputProps } = useUploadThingInputProps("imageUploader", {
     onUploadBegin() {
-      toast(
-        <div className="flex items-center gap-2 text-white">
-          <LoadingSpinnerSVG /> <span className="text-lg">Uploading...</span>
-        </div>,
-        {
-          duration: 100000,
-          id: "upload-begin",
-        },
-      );
+      toast("uploading...", {
+        duration: 100000,
+        id: "upload-begin",
+      });
     },
     onUploadError(error) {
       toast.dismiss("upload-begin");
       toast.error("Upload failed");
     },
     onClientUploadComplete() {
+      toast.dismiss("upload-begin");
+      toast("upload complete");
       router.refresh();
     },
   });

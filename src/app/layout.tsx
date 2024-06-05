@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 import "@uploadthing/react/styles.css";
 import TopNav from "./_components/topnav";
 import { GeistSans } from "geist/font/sans";
+import { Toaster } from "sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
@@ -26,11 +27,12 @@ export default function RootLayout({
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <body className={` dark flex flex-col gap-4`}>
           <TopNav className=" " />
-          <TracingBeam>
+          <TracingBeam className="mt-10 p-8">
             <div className="p-8 pt-28">
               {children}
               {modal}
               <div id="modal-root" />
+              <Toaster />
             </div>
           </TracingBeam>
         </body>
