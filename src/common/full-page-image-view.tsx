@@ -1,6 +1,6 @@
 import { clerkClient } from "@clerk/nextjs/server";
 import { DeleteImage, getImage } from "~/server/queries";
-
+import DeleteButton from "~/app/_components/delete-button";
 import { toast } from "sonner";
 import { Button } from "~/components/ui/button";
 import Image from "next/image";
@@ -11,6 +11,12 @@ export async function FullPageImageView(props: { photoId: string }) {
   const image = await getImage(idAsNumber);
 
   const userInfo = await clerkClient.users.getUser(image.userId);
+
+  const handleDelete = async () => {
+    "use server";
+
+    await DeleteImage(idAsNumber);
+  };
 
   return (
     <div className="xs:flex-col flex h-full w-screen min-w-0 items-center justify-center text-white  ">
@@ -40,16 +46,8 @@ export async function FullPageImageView(props: { photoId: string }) {
         </div>
 
         <div className="p-2">
-          <form
-            action={async () => {
-              "use server";
-
-              await DeleteImage(idAsNumber);
-            }}
-          >
-            <Button type="submit" variant="destructive">
-              Delete
-            </Button>
+          <form action={handleDelete}>
+            <DeleteButton onDelete={handleDelete}></DeleteButton>
           </form>
         </div>
       </div>
