@@ -27,7 +27,7 @@ export default function RootLayout({
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <body className={` dark flex flex-col gap-4`}>
           <TopNav className=" " />
-          <TracingBeam className="mt-10 p-8">
+          <TracingBeam className="mt-6 p-8">
             <div className="p-8 pt-28">
               {children}
               {modal}
